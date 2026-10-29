@@ -1,0 +1,566 @@
+/* ==================== СБРОС ============== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ==================== ПЕРЕМЕННЫЕ ============== */
+:root {
+    --color-primary: #1b263b;          /* тёмно‑синий */
+    --color-bg: #f5f7fa;               /* светло‑серый */
+    --color-accent: #00bfa5;           /* бирюзовый */
+    --color-white: #ffffff;
+    --color-light: #e2e8f0;
+    --font-primary: 'Inter', sans-serif;
+    --spacing: 1rem;
+}
+
+/* ==================== ГЛОБАЛЬНЫЕ СТИЛИ ============== */
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: var(--font-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    background: var(--color-bg);
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing);
+}
+
+/* ==================== КНОПКИ ============== */
+.button {
+    cursor: pointer;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background .2s, color .2s;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+.button-primary {
+    background: var(--color-accent);
+    color: var(--color-white);
+}
+.button-primary:hover {
+    background: #009688;
+}
+.button-outline {
+    background: transparent;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+}
+.button-outline:hover {
+    background: var(--color-accent);
+    color: var(--color-white);
+}
+
+/* ==================== ХЕДЕР ==================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--color-white);
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    z-index: 1000;
+}
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+}
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+.nav {
+    display: flex;
+}
+.nav ul {
+    display: flex;
+    list-style: none;
+}
+.nav li {
+    margin-left: 1.5rem;
+}
+.nav a {
+    text-decoration: none;
+    color: var(--color-primary);
+    font-weight: 500;
+    transition: color .2s;
+}
+.nav a:hover {
+    color: var(--color-accent);
+}
+.header-cta {
+    display: flex;
+    align-items: center;
+}
+.phone {
+    margin-right: 1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* ==================== БУРГЕР ============== */
+.burger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.burger span {
+    display: block;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: transform .3s, opacity .3s;
+}
+.burger.open span:nth-child(2) {
+    opacity: 0;
+}
+.burger.open span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+}
+.burger.open span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ======== Мобильное меню ========= */
+@media (max-width: 767px) {
+    .nav {
+        position: fixed;
+        top: 0;
+        right: -260px;
+        height: 100vh;
+        width: 260px;
+        background: var(--color-white);
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 4rem;
+        padding-left: 1rem;
+        transition: right .3s ease;
+        box-shadow: -2px 0 5px rgba(0,0,0,.1);
+    }
+    .nav.nav-open {
+        right: 0;
+    }
+    .nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav li {
+        margin: 1rem 0;
+        width: 100%;
+    }
+    .nav a {
+        font-size: 1.2rem;
+        width: 100%;
+    }
+    .header-cta {
+        display: none;
+    }
+    .burger {
+        display: flex;
+    }
+}
+
+/* ==================== ПЕРВЫЙ ЭКРАН ==================== */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #e8f0fe, #ffffff);
+    position: relative;
+    padding-top: 70px; /* Т.к. хедер фиксированный */
+}
+.hero-content {
+    max-width: 650px;
+}
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+.hero-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #555;
+}
+.hero-buttons .button {
+    margin-right: 0.8rem;
+}
+.hero-features {
+    list-style: none;
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    color: #555;
+}
+.hero-features li::before {
+    content: "✔";
+    color: var(--color-accent);
+    margin-right: 0.5rem;
+}
+
+/* ==================== СЕКЦИИ ==================== */
+.section {
+    padding: 4rem 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .6s ease-out, transform .6s ease-out;
+}
+.section.visible {
+    opacity: 1;
+    transform: none;
+}
+.section-title {
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: var(--color-primary);
+}
+
+/* ==================== УСЛУГИ ==================== */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+.service-card {
+    background: var(--color-white);
+    border-radius: 6px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform .2s, box-shadow .2s;
+}
+.service-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-primary);
+}
+.service-card p {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    color: #444;
+}
+.service-card .button-outline {
+    align-self: flex-start;
+}
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+/* ==================== ПРЕИМУЩЕСТВА ==================== */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+.benefit-card {
+    background: var(--color-white);
+    border-radius: 6px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.1);
+    text-align: center;
+    transition: transform .2s, box-shadow .2s;
+}
+.benefit-card .icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.8rem;
+    color: var(--color-accent);
+}
+.benefit-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+    color: var(--color-primary);
+}
+.benefit-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+/* ==================== ЭТАПЫ РАБОТЫ (ТАЙМЛАЙН) ==================== */
+.timeline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.timeline-item {
+    background: var(--color-white);
+    border-radius: 6px;
+    padding: 1.2rem;
+    flex: 1 1 260px;
+    position: relative;
+    box-shadow: 0 1px 4px rgba(0,0,0,.1);
+    transition: transform .2s, box-shadow .2s;
+}
+.timeline-number {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 35px;
+    height: 35px;
+    background: var(--color-accent);
+    color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+.timeline-item h3 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.6rem;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+}
+.timeline-item p {
+    font-size: 0.95rem;
+    color: #555;
+}
+.timeline-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+
+/* ==================== КЛИЕНТЫ ==================== */
+.clients-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+.client-card {
+    background: var(--color-white);
+    border-radius: 6px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.1);
+}
+.client-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+    color: var(--color-primary);
+}
+.client-card p {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* ==================== ЦЕНЫ ==================== */
+.price-list {
+    list-style: none;
+    margin: 0 0 1.5rem 0;
+    padding-left: 0;
+    font-size: 1.1rem;
+}
+.price-list li {
+    margin-bottom: 0.6rem;
+}
+.price-note {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* ==================== ФОРМА ==================== */
+.lead-form {
+    max-width: 560px;
+    background: var(--color-white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.1);
+}
+.lead-form .form-group {
+    margin-bottom: 1rem;
+}
+.lead-form label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+.lead-form input,
+.lead-form select,
+.lead-form textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+}
+.lead-form textarea {
+    resize: vertical;
+}
+.lead-form .error {
+    color: #d32f2f;
+    font-size: 0.85rem;
+}
+.lead-form .form-message {
+    margin-top: 1rem;
+    font-weight: 500;
+    color: #2e7d32;
+}
+
+/* ==================== ОТЗЫВЫ ==================== */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+.testimonial-card {
+    background: var(--color-white);
+    border-radius: 6px;
+    padding: 1.5rem;
+    box-shadow:0 1px 4px rgba(0,0,0,.1);
+    position: relative;
+}
+.testimonial-card p {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    color: #555;
+}
+.testimonial-card h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+.testimonial-card .service-type {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* ==================== КОНТАКТЫ ==================== */
+.contacts .contact-info p,
+.contacts .contact-info a {
+    margin-bottom: 0.6rem;
+    color:#333;
+    text-decoration:none;
+}
+.map-placeholder {
+    margin-top:2rem;
+    height:250px;
+    background:#e2e8f0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#666;
+    font-size:1rem;
+}
+
+/* ==================== ФУТЕР ==================== */
+.footer {
+    background: var(--color-primary);
+    color: var(--color-white);
+    padding-top: 3rem;
+}
+.footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap:2rem;
+    margin-bottom:2rem;
+}
+.footer .logo {
+    font-size:1.6rem;
+    font-weight:600;
+}
+.footer-description {
+    max-width: 400px;
+    line-height:1.5;
+}
+.footer-nav ul {
+    list-style:none;
+}
+.footer-nav li {
+    margin-bottom:0.5rem;
+}
+.footer-nav a {
+    color: var(--color-white);
+    text-decoration:none;
+}
+.footer-contacts p a {
+    color: var(--color-white);
+}
+.footer-bottom {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-size:0.9rem;
+    border-top:1px solid rgba(255,255,255,.2);
+    padding:1rem 0;
+}
+.footer-bottom a {
+    color: var(--color-white);
+    text-decoration:underline;
+    margin-top:0.4rem;
+}
+
+/* ==================== КНОПКА «Наверх» ==================== */
+#back-to-top {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    background: var(--color-accent);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    opacity:0;
+    visibility:hidden;
+    transition: opacity .3s;
+}
+#back-to-top.show {
+    opacity:1;
+    visibility:visible;
+}
+
+/* ==================== МЕДИА ==================== */
+@media (max-width: 576px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero-subtitle {
+        font-size:1rem;
+    }
+    .hero-features {
+        grid-template-columns:1fr;
+    }
+}
